@@ -225,7 +225,11 @@ if(isset($message)){
                         <label for="selected_size" class="form-label">Select Size</label>
                         <select class="form-select" id="selected_size" name="selected_size" required>
                             <option value="">Choose size...</option>
-                            <?php foreach (explode(',', $product['size']) as $size): ?>
+                            <?php 
+                            // FIXED: Use correct size column
+                            $size_options = $product['available_sizes'] ?: $product['size'];
+                            foreach (explode(',', $size_options) as $size): 
+                            ?>
                                 <option value="<?= trim($size) ?>"><?= trim($size) ?></option>
                             <?php endforeach; ?>
                         </select>
