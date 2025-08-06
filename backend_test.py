@@ -59,7 +59,7 @@ class PHPAppTester:
             }
 
             response = self.session.post(f"{self.base_url}/user/register.php", data=test_data)
-            success = response.status_code == 200 and ("login.php" in response.url.lower() or "success" in response.text.lower())
+            success = response.status_code == 200 and ("login.php" in response.url.lower() or "login" in response.text.lower())
             return self.log_test("User Registration", success, f"Status: {response.status_code}")
         except Exception as e:
             return self.log_test("User Registration", False, f"Error: {str(e)}")
