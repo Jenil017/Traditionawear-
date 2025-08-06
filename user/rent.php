@@ -30,7 +30,24 @@ if (isset($_POST['add_to_cart'])) {
         $product_price = $_POST['product_price'];
         $selected_size = $_POST['selected_size'] ?? 'M';
         $selected_color = $_POST['selected_color'] ?? 'Default';
-        $rental_days = $_POST['rental_days'] ?? 1;
+        
+        // FIXED: Handle rental dates properly
+        $start_date = $_POST['start_date'] ?? null;
+        $end_date = $_POST['end_date'] ?? null;
+        $payment_method = $_POST['payment_method'] ?? 'COD';
+        $upi_id = $_POST['upi_id'] ?? null;
+        $special_requests = $_POST['special_requests'] ?? null;
+        
+        // Calculate rental days
+        $rental_days = 1; // default
+        if ($start_date && $end_date) {
+            $start = new DateTime($start_date);
+            $end = new DateTime($end_date);
+            $rental_days = max(1, $end->diff($start)->days + 1);
+        } else {
+            $rental_days = $_POST['rental_days'] ?? 1;
+        }
+        
         $total_price = number_format($product_price * $rental_days, 2, '.', '');
         
         // Check if product already exists in cart
@@ -46,7 +63,7 @@ if (isset($_POST['add_to_cart'])) {
             $product_details = $stmt->fetch();
             
             if ($product_details) {
-                $insert_cart = $pdo->prepare("INSERT INTO cart_items (product_id, user_id, product_name, product_number, category_id, description, selected_size, selected_color, available_sizes, available_colors, price_per_day, image_url, quantity, rental_days, subtotal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $insert_cart = $pdo->prepare("INSERT INTO cart_items (product_id, user_id, product_name, product_number, category_id, description, selected_size, selected_color, available_sizes, available_colors, price_per_day, image_url, quantity, start_date, end_date, rental_days, subtotal, payment_method, upi_id, special_requests) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 
                 // FIXED: Use consistent column names  
                 $available_sizes = $product_details['available_sizes'] ?: $product_details['size'];
@@ -66,8 +83,13 @@ if (isset($_POST['add_to_cart'])) {
                     $product_price,
                     $product_image,
                     1, // quantity
+                    $start_date,       // FIXED: Add start_date
+                    $end_date,         // FIXED: Add end_date
                     $rental_days,
-                    $total_price
+                    $total_price,
+                    $payment_method,   // FIXED: Add payment_method
+                    $upi_id,          // FIXED: Add upi_id
+                    $special_requests  // FIXED: Add special_requests
                 ]);
                 
                 if ($result) {
