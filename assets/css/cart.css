@@ -1,0 +1,311 @@
+/* Cart Page Styles */
+.cart-header {
+    background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.cart-header h2 {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.cart-header p {
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+/* Empty Cart Styles */
+.empty-cart {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 3rem;
+}
+
+.empty-cart-icon {
+    font-size: 4rem;
+    color: #8B4513;
+    opacity: 0.5;
+}
+
+/* Cart Items */
+.cart-items {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.cart-item {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item:hover {
+    background-color: #f8f9fa;
+}
+
+.product-image img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #eee;
+}
+
+.product-details {
+    padding-left: 1rem;
+}
+
+.product-name {
+    color: #8B4513;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.product-options {
+    margin-bottom: 0.5rem;
+}
+
+.option-badge {
+    background: #f8f9fa;
+    color: #8B4513;
+    padding: 0.25rem 0.5rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    border: 1px solid #dee2e6;
+}
+
+.rental-period {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.rental-period i {
+    color: #8B4513;
+}
+
+.days-count {
+    background: #8B4513;
+    color: white;
+    padding: 0.1rem 0.4rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
+
+.payment-method {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.payment-method i {
+    color: #28a745;
+}
+
+.special-requests {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.price-section {
+    padding: 1rem;
+}
+
+.price-per-day {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.total-price {
+    color: #8B4513;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.remove-item .btn {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-item .btn:hover {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+/* Cart Summary */
+.cart-summary {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 2rem;
+    position: sticky;
+    top: 2rem;
+}
+
+.summary-title {
+    color: #8B4513;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.summary-row.total-row {
+    font-size: 1.1rem;
+    color: #8B4513;
+    padding-top: 1rem;
+}
+
+.checkout-section .btn-primary {
+    background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.checkout-section .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+}
+
+.checkout-section .btn-outline-secondary {
+    border-color: #8B4513;
+    color: #8B4513;
+    font-weight: 500;
+}
+
+.checkout-section .btn-outline-secondary:hover {
+    background-color: #8B4513;
+    border-color: #8B4513;
+}
+
+/* Rental Policy */
+.rental-policy {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #8B4513;
+}
+
+.rental-policy h6 {
+    color: #8B4513;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.policy-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.policy-list li {
+    padding: 0.25rem 0;
+    font-size: 0.85rem;
+    color: #666;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.policy-list li:before {
+    content: "•";
+    color: #8B4513;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cart-header {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .cart-item {
+        padding: 1rem;
+    }
+    
+    .product-details {
+        padding-left: 0;
+        margin-top: 1rem;
+    }
+    
+    .price-section {
+        text-align: left;
+        padding: 0.5rem 0;
+    }
+    
+    .remove-item {
+        text-align: left;
+        margin-top: 0.5rem;
+    }
+    
+    .cart-summary {
+        margin-top: 2rem;
+        position: static;
+    }
+    
+    .option-badge {
+        display: block;
+        margin-bottom: 0.25rem;
+        margin-right: 0;
+        width: fit-content;
+    }
+}
+
+/* Animation for cart updates */
+.cart-item {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Alert styling */
+.alert {
+    border-radius: 10px;
+    border: none;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
