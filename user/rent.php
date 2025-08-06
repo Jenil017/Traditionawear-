@@ -421,6 +421,40 @@ function changeMainImage(imageSrc, thumbnailElement) {
         thumbnailElement.style.border = '2px solid #007bff';
     }
 }
+
+// FIXED: Calculate rental days and total price automatically
+function calculateTotal() {
+    const startDate = document.getElementById('start_date').value;
+    const endDate = document.getElementById('end_date').value;
+    const pricePerDay = <?= $product['price_per_day'] ?>;
+    
+    if (startDate && endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const timeDiff = end.getTime() - start.getTime();
+        const dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
+        
+        if (dayDiff > 0) {
+            const totalDays = dayDiff;
+            const totalPrice = pricePerDay * totalDays;
+            
+            document.getElementById('totalDays').textContent = totalDays;
+            document.getElementById('totalPrice').value = '₹' + totalPrice.toFixed(2);
+            document.getElementById('rental_days_hidden').value = totalDays;
+        }
+    }
+}
+
+// Add event listeners for date changes
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('start_date').addEventListener('change', calculateTotal);
+    document.getElementById('end_date').addEventListener('change', calculateTotal);
+    
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('start_date').min = today;
+    document.getElementById('end_date').min = today;
+});
 </script>
 
 <?php require_once '../includes/footer.php'; ?>
