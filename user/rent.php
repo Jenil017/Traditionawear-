@@ -180,8 +180,13 @@ if(isset($message)){
 
                 <div class="mb-3">
                     <h4 class="price-tag">₹<?= $product['price_per_day'] ?>/day</h4>
-                    <p><strong>Available Sizes:</strong> <?= htmlspecialchars($product['size']) ?></p>
-                    <p><strong>Available Colors:</strong> <?= htmlspecialchars($product['color']) ?></p>
+                    <?php 
+                    // FIXED: Use available_sizes/available_colors or fallback to size/color
+                    $display_sizes = $product['available_sizes'] ?: $product['size'];
+                    $display_colors = $product['available_colors'] ?: $product['color'];
+                    ?>
+                    <p><strong>Available Sizes:</strong> <?= htmlspecialchars($display_sizes) ?></p>
+                    <p><strong>Available Colors:</strong> <?= htmlspecialchars($display_colors) ?></p>
                     <p><strong>Stock:</strong> <?= $product['quantity_available'] ?> available</p>
                 </div>
             </div>
