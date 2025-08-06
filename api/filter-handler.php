@@ -17,14 +17,19 @@ try {
             break;
 
         case 'sizes':
-            $stmt = $pdo->query("SELECT size FROM products WHERE status = 'active' AND quantity_available > 0");
+            // FIXED: Use both size and available_sizes columns for compatibility
+            $stmt = $pdo->query("SELECT size, available_sizes FROM products WHERE status = 'active' AND quantity_available > 0");
             $sizes = [];
             while ($row = $stmt->fetch()) {
-                $product_sizes = explode(',', $row['size']);
-                foreach ($product_sizes as $size) {
-                    $size = trim($size);
-                    if ($size) {
-                        $sizes[$size] = true;
+                // Check both columns for size data
+                $size_data = $row['available_sizes'] ?: $row['size'];
+                if ($size_data) {
+                    $product_sizes = explode(',', $size_data);
+                    foreach ($product_sizes as $size) {
+                        $size = trim($size);
+                        if ($size) {
+                            $sizes[$size] = true;
+                        }
                     }
                 }
             }
