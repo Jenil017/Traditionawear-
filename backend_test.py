@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 import time
 
 class PHPAppTester:
-    def __init__(self, base_url="http://localhost"):
+    def __init__(self, base_url="http://localhost/app"):
         self.base_url = base_url
         self.session = requests.Session()
         self.tests_run = 0
