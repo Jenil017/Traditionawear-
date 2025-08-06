@@ -78,11 +78,7 @@ if (isset($_POST['add_to_cart'])) {
     }
 }
 
-// Check if user is logged in BEFORE including header
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php?redirect=rent.php');
-    exit;
-}
+
 
 $product_id = $_GET['id'] ?? null;
 if (!$product_id) {
