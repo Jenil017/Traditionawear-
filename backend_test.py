@@ -67,12 +67,12 @@ class PHPAppTester:
         try:
             # Test with existing user credentials
             login_data = {
-                'email': 'john@example.com',
+                'login_credential': 'john@example.com',
                 'password': 'password'
             }
 
             response = self.session.post(f"{self.base_url}/user/login.php", data=login_data)
-            success = response.status_code == 200 and ("dashboard" in response.url.lower() or "products" in response.url.lower() or "welcome" in response.text.lower())
+            success = response.status_code == 200 and ("dashboard" in response.url.lower() or "products" in response.url.lower() or "index.php" in response.url.lower())
             
             if success:
                 self.user_session = self.session
