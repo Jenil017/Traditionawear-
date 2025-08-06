@@ -1,7 +1,20 @@
 <?php
 session_start();
 require_once '../config/db.php';
-error_reporting(0);
+
+// FIXED: Enable error reporting for debugging (in development)
+if (defined('DEVELOPMENT') && DEVELOPMENT === true) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+} else {
+    error_reporting(0); // Hide errors in production
+}
+
+// FIXED: Define user_id variable early
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php?redirect=cart.php');
+    exit;
+}
 
 $user_id = $_SESSION['user_id'];
 
