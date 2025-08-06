@@ -39,7 +39,8 @@ try {
             break;
 
         case 'colors':
-            $sql = "SELECT color FROM products WHERE status = 'active' AND quantity_available > 0";
+            // FIXED: Use both color and available_colors columns for compatibility
+            $sql = "SELECT color, available_colors FROM products WHERE status = 'active' AND quantity_available > 0";
             $params = [];
 
             if (!empty($_GET['category'])) {
@@ -52,11 +53,15 @@ try {
 
             $colors = [];
             while ($row = $stmt->fetch()) {
-                $product_colors = explode(',', $row['color']);
-                foreach ($product_colors as $color) {
-                    $color = trim(strtolower($color));
-                    if ($color) {
-                        $colors[$color] = true;
+                // Check both columns for color data
+                $color_data = $row['available_colors'] ?: $row['color'];
+                if ($color_data) {
+                    $product_colors = explode(',', $color_data);
+                    foreach ($product_colors as $color) {
+                        $color = trim(strtolower($color));
+                        if ($color) {
+                            $colors[$color] = true;
+                        }
                     }
                 }
             }
