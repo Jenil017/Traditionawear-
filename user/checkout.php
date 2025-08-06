@@ -1,6 +1,15 @@
 <?php
 session_start();
 require_once '../config/db.php';
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php?redirect=checkout.php');
+    exit;
+}
+
+$user_id = $_SESSION['user_id']; // FIXED: Define user_id variable
+
 // Fetch cart items from database
 try {
     $stmt = $pdo->prepare("SELECT * FROM cart_items WHERE user_id = ? ORDER BY added_at DESC");
