@@ -2,9 +2,22 @@
 // Start session first
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 require_once '../config/db.php';
-error_reporting(0);
 
-$user_id = $_SESSION['user_id'];
+// FIXED: Enable error reporting for debugging (in development)
+if (defined('DEVELOPMENT') && DEVELOPMENT === true) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+} else {
+    error_reporting(0); // Hide errors in production
+}
+
+// Check if user is logged in FIRST
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php?redirect=rent.php');
+    exit;
+}
+
+$user_id = $_SESSION['user_id']; // FIXED: Define user_id variable early
 
 // Handle Add to Cart
 if (isset($_POST['add_to_cart'])) {
