@@ -239,7 +239,11 @@ if(isset($message)){
                         <label for="selected_color" class="form-label">Select Color</label>
                         <select class="form-select" id="selected_color" name="selected_color" required>
                             <option value="">Choose color...</option>
-                            <?php foreach (explode(',', $product['color']) as $color): ?>
+                            <?php 
+                            // FIXED: Use correct color column
+                            $color_options = $product['available_colors'] ?: $product['color'];
+                            foreach (explode(',', $color_options) as $color): 
+                            ?>
                                 <option value="<?= trim($color) ?>"><?= trim($color) ?></option>
                             <?php endforeach; ?>
                         </select>
