@@ -49,15 +49,17 @@ class PHPAppTester:
             # Test registration with new user
             timestamp = int(time.time())
             test_data = {
+                'user_name': f'testuser{timestamp}',
                 'name': f'Test User {timestamp}',
                 'email': f'testuser{timestamp}@example.com',
                 'phone': '9876543210',
+                'address': 'Test Address',
                 'password': 'TestPass123!',
                 'confirm_password': 'TestPass123!'
             }
 
             response = self.session.post(f"{self.base_url}/user/register.php", data=test_data)
-            success = response.status_code == 200 and ("success" in response.text.lower() or "registered" in response.text.lower())
+            success = response.status_code == 200 and ("login.php" in response.url.lower() or "success" in response.text.lower())
             return self.log_test("User Registration", success, f"Status: {response.status_code}")
         except Exception as e:
             return self.log_test("User Registration", False, f"Error: {str(e)}")
