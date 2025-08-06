@@ -48,6 +48,10 @@ if (isset($_POST['add_to_cart'])) {
             if ($product_details) {
                 $insert_cart = $pdo->prepare("INSERT INTO cart_items (product_id, user_id, product_name, product_number, category_id, description, selected_size, selected_color, available_sizes, available_colors, price_per_day, image_url, quantity, rental_days, subtotal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 
+                // FIXED: Use consistent column names  
+                $available_sizes = $product_details['available_sizes'] ?: $product_details['size'];
+                $available_colors = $product_details['available_colors'] ?: $product_details['color'];
+                
                 $result = $insert_cart->execute([
                     $product_id_post,
                     $user_id,
@@ -57,8 +61,8 @@ if (isset($_POST['add_to_cart'])) {
                     $product_details['description'],
                     $selected_size,
                     $selected_color,
-                    $product_details['available_sizes'],
-                    $product_details['available_colors'],
+                    $available_sizes,  // FIXED: Use correct available_sizes
+                    $available_colors, // FIXED: Use correct available_colors
                     $product_price,
                     $product_image,
                     1, // quantity
