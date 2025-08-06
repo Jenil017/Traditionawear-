@@ -37,11 +37,7 @@ if (isset($_POST['remove_from_cart'])) {
     }
 }
 
-// Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php?redirect=cart.php');
-    exit;
-}
+
 
 require_once '../includes/header.php';
 
